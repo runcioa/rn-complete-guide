@@ -11,33 +11,22 @@ import {
 } from "react-native";
 
 import GoalItem from "./component/GoalItem";
+import GoalInput from "./component/GoalInput";
 
 export default function App() {
-  const [enteredGoal, setEnteredGoal] = useState("");
+ 
   const [courseGoal, setcourseGoal] = useState([]);
-
-  const goalInputHandler = (enteredText) => {
-    setEnteredGoal(enteredText);
-  };
-
-  const addGoalHandler = () => {
+  
+  const addGoalHandler = (goalTitle) => {
     setcourseGoal((currentGoals) => [
       ...courseGoal,
-      { id: Math.random().toString(), value: enteredGoal },
+      { id: Math.random().toString(), value: goalTitle },
     ]);
   };
 
   return (
     <View style={style.screen}>
-      <View style={style.inputContainer}>
-        <TextInput
-          placeholder="Course Goal"
-          style={style.input}
-          onChangeText={goalInputHandler}
-          value={enteredGoal}
-        />
-        <Button title="ADD" onPress={addGoalHandler} />
-      </View>
+     <GoalInput onAddGoal={addGoalHandler}/>
       <FlatList
         keyExtractor={(item, index) => item.id}
         data={courseGoal}
@@ -55,16 +44,6 @@ const style = StyleSheet.create({
   screen: {
     padding: 50,
   },
-  inputContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-  input: {
-    borderColor: "black",
-    borderWidth: 1,
-    padding: 10,
-    width: "80%",
-  },
+ 
   
 });
