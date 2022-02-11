@@ -10,6 +10,8 @@ import {
   FlatList,
 } from "react-native";
 
+import GoalItem from "./component/GoalItem";
+
 export default function App() {
   const [enteredGoal, setEnteredGoal] = useState("");
   const [courseGoal, setcourseGoal] = useState([]);
@@ -40,9 +42,7 @@ export default function App() {
         keyExtractor={(item, index) => item.id}
         data={courseGoal}
         renderItem={(itemData) => (
-          <View style={style.listItem}>
-            <Text>{itemData.item.value}</Text>
-          </View>
+          <GoalItem title={itemData.item.value} />
         )}
       >
         )
@@ -66,11 +66,5 @@ const style = StyleSheet.create({
     padding: 10,
     width: "80%",
   },
-  listItem: {
-    padding: 10,
-    marginVertical: 10,
-    backgroundColor: "#ccc",
-    borderColor: "black",
-    borderWidth: 1,
-  },
+  
 });
